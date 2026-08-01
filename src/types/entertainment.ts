@@ -1,3 +1,6 @@
+import type { CSSProperties } from "react";
+
+export type categories = "Movie" | "TV Series";
 export type EntertainmentCard = {
   title: string;
   thumbnail: {
@@ -12,12 +15,25 @@ export type EntertainmentCard = {
     };
   };
   year: number;
-  category: string;
+  category: categories;
   rating: string;
   isBookmarked: boolean;
   isTrending: boolean;
+  id: number;
+  onChangeBookmark: (id: number) => void;
 };
-
 export type EntertainmentCardsProps = {
   movies: EntertainmentCard[];
-}
+  onChangeBookmark: (id: number) => void;
+};
+export type IconsProps = {
+  category: string;
+};
+export type EntertainmentCardStyle = CSSProperties & {
+  "--bg-small": string;
+  "--bg-large": string;
+};
+export type EntertainmentButtonProps = {
+  onToggleBookmark: () => void;
+  isBookmarked: boolean;
+};
