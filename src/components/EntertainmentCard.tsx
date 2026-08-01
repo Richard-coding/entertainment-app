@@ -1,7 +1,7 @@
 
 import type {
   EntertainmentCardStyle,
-  EntertainmentCard,
+  EntertainmentCard as EntertainmentCardType,
 } from "../types/entertainment";
 import BookmarkedButton from "./BookmarkedButton";
 import Icons from "./Icons";
@@ -16,7 +16,7 @@ const EntertainmentCard = ({
   year,
   id,
   onChangeBookmark,
-}: EntertainmentCard) => {
+}: EntertainmentCardType) => {
   const cardStyle: EntertainmentCardStyle = {
     "--bg-small": `url(${thumbnail.trending?.small})`,
     "--bg-large": `url(${thumbnail.trending?.large})`,
