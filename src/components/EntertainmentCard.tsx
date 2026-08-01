@@ -1,4 +1,10 @@
-import type { EntertainmentCard } from "../types/entertainment";
+
+import type {
+  EntertainmentCardStyle,
+  EntertainmentCard,
+} from "../types/entertainment";
+import BookmarkedButton from "./BookmarkedButton";
+import Icons from "./Icons";
 
 const EntertainmentCard = ({
   title,
@@ -8,18 +14,45 @@ const EntertainmentCard = ({
   rating,
   thumbnail,
   year,
+  id,
+  onChangeBookmark,
 }: EntertainmentCard) => {
+  const cardStyle: EntertainmentCardStyle = {
+    "--bg-small": `url(${thumbnail.trending?.small})`,
+    "--bg-large": `url(${thumbnail.trending?.large})`,
+  };
+
+  const onToggleBookmark = (id: number) => {
+    onChangeBookmark(id);
+  };
+
   return (
-    <div>
-      <p>
-        {isBookmarked} {isTrending}
-      </p>
-      <img src={thumbnail.regular.large} alt="" />
-      <p>
-        {year} {category} {rating}
-      </p>
-      <h2>{title}</h2>
-    </div>
+    <>
+      {isTrending ? (
+        <div
+          style={cardStyle}
+          className="bg-[image:var(--bg-small)] md:bg-[image:var(--bg-large)] lg:bg-[image:var(--bg-large)] bg-cover rounded-lg"
+        >
+          <div className="p-2 min-w-60 min-h-35 flex flex-col justify-between ">
+            <div className="ml-auto">
+              <BookmarkedButton
+                onToggleBookmark={() => onToggleBookmark(id)}
+                isBookmarked={isBookmarked}
+              />
+            </div>
+
+            <div className="pb-1.5 pl-2">
+              <div className="flex gap-1.5 items-center">
+                {year} • <Icons category={category} /> {category} • {rating}
+              </div>
+              <h2>{title}</h2>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div>Arrumar isso</div>
+      )}
+    </>
   );
 };
 
