@@ -1,12 +1,12 @@
 import type { EntertainmentCardsProps } from "../types/entertainment";
 import EntertainmentCard from "./EntertainmentCard";
 
-const EntertainmentCards = ({ movies, onChangeBookmark }: EntertainmentCardsProps) => {
+const EntertainmentCards = ({ movies, onChangeBookmark, variant }: EntertainmentCardsProps) => {
 
   return (
     <div className="flex gap-4">
       {movies.map((movie) => (
-        <EntertainmentCard key={movie.id} {...movie} onChangeBookmark={onChangeBookmark}/>
+        <EntertainmentCard key={movie.id} {...movie} onChangeBookmark={onChangeBookmark} variant={variant}/>
       ))}
     </div>
   );

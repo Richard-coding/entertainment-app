@@ -1,4 +1,3 @@
-
 import type {
   EntertainmentCardStyle,
   EntertainmentCard as EntertainmentCardType,
@@ -16,10 +15,16 @@ const EntertainmentCard = ({
   year,
   id,
   onChangeBookmark,
+  variant,
 }: EntertainmentCardType) => {
+  const isTrendingVariant = variant === "trending";
   const cardStyle: EntertainmentCardStyle = {
-    "--bg-small": `url(${thumbnail.trending?.small})`,
-    "--bg-large": `url(${thumbnail.trending?.large})`,
+    "--bg-small": `url(${
+      isTrendingVariant ? thumbnail.trending?.small : thumbnail.regular.small
+    })`,
+    "--bg-large": `url(${
+      isTrendingVariant ? thumbnail.trending?.large : thumbnail.regular.large
+    })`,
   };
 
   const onToggleBookmark = (id: number) => {
@@ -28,7 +33,7 @@ const EntertainmentCard = ({
 
   return (
     <>
-      {isTrending ? (
+      {variant === "trending" ? (
         <div
           style={cardStyle}
           className="bg-[image:var(--bg-small)] md:bg-[image:var(--bg-large)] lg:bg-[image:var(--bg-large)] bg-cover rounded-lg"
@@ -50,7 +55,18 @@ const EntertainmentCard = ({
           </div>
         </div>
       ) : (
-        <div>Arrumar isso</div>
+        <div>
+          <div
+            style={cardStyle}
+            className="w-[164px] min-h-[110px] bg-[image:var(--bg-small)] md:bg-[image:var(--bg-large)] lg:bg-[image:var(--bg-large)] bg-cover rounded-lg"
+          ></div>
+          <div className="pb-1.5 pl-2">
+            <div className="flex gap-1.5 items-center">
+              {year} • <Icons category={category} /> {category} • {rating}
+            </div>
+            <h2>{title}</h2>
+          </div>
+        </div>
       )}
     </>
   );

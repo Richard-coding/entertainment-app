@@ -27,6 +27,7 @@ const Home = () => {
         <EntertainmentCards
           movies={isTrending}
           onChangeBookmark={onChangeBookmark}
+          variant="trending"
         />
       </div>
 
@@ -35,6 +36,7 @@ const Home = () => {
         <EntertainmentCards
           movies={isRegular}
           onChangeBookmark={onChangeBookmark}
+          variant="regular"
         />
       </div>
     </div>

@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 
 export type categories = "Movie" | "TV Series";
+export type variant = "trending" | "regular";
 export type EntertainmentCard = {
   title: string;
   thumbnail: {
@@ -21,10 +22,12 @@ export type EntertainmentCard = {
   isTrending: boolean;
   id: number;
   onChangeBookmark: (id: number) => void;
+  variant: string;
 };
 export type EntertainmentCardsProps = {
   movies: EntertainmentCard[];
   onChangeBookmark: (id: number) => void;
+  variant: string;
 };
 export type IconsProps = {
   category: string;
