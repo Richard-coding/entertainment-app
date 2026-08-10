@@ -6,7 +6,7 @@ const EntertainmentCards = ({ movies, onChangeBookmark, variant }: Entertainment
   return (
     <div className="flex gap-4">
       {movies.map((movie) => (
-        <EntertainmentCard key={movie.id} {...movie} onChangeBookmark={onChangeBookmark} variant={variant}/>
+        <EntertainmentCard key={movie.id} movie={movie} onChangeBookmark={onChangeBookmark} variant={variant}/>
       ))}
     </div>
   );

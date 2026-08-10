@@ -1,29 +1,22 @@
 import type {
+  EntertainmentCardProps,
   EntertainmentCardStyle,
-  EntertainmentCard as EntertainmentCardType,
 } from "../types/entertainment";
 import BookmarkedButton from "./BookmarkedButton";
 import Icons from "./Icons";
 
 const EntertainmentCard = ({
-  title,
-  category,
-  isBookmarked,
-  isTrending,
-  rating,
-  thumbnail,
-  year,
-  id,
+  movie,
   onChangeBookmark,
   variant,
-}: EntertainmentCardType) => {
+}: EntertainmentCardProps) => {
   const isTrendingVariant = variant === "trending";
   const cardStyle: EntertainmentCardStyle = {
     "--bg-small": `url(${
-      isTrendingVariant ? thumbnail.trending?.small : thumbnail.regular.small
+      isTrendingVariant ? movie.thumbnail.trending?.small : movie.thumbnail.regular.small
     })`,
     "--bg-large": `url(${
-      isTrendingVariant ? thumbnail.trending?.large : thumbnail.regular.large
+      isTrendingVariant ?movie.thumbnail.trending?.large : movie.thumbnail.regular.large
     })`,
   };
 
@@ -41,16 +34,16 @@ const EntertainmentCard = ({
           <div className="p-2 min-w-60 min-h-35 flex flex-col justify-between ">
             <div className="ml-auto">
               <BookmarkedButton
-                onToggleBookmark={() => onToggleBookmark(id)}
-                isBookmarked={isBookmarked}
+                onToggleBookmark={() => onToggleBookmark(movie.id)}
+                isBookmarked={movie.isBookmarked}
               />
             </div>
 
             <div className="pb-1.5 pl-2">
               <div className="flex gap-1.5 items-center">
-                {year} • <Icons category={category} /> {category} • {rating}
+                {movie.year} • <Icons category={movie.category} /> {movie.category} • {movie.rating}
               </div>
-              <h2>{title}</h2>
+              <h2>{movie.title}</h2>
             </div>
           </div>
         </div>
@@ -62,9 +55,9 @@ const EntertainmentCard = ({
           ></div>
           <div className="pb-1.5 pl-2">
             <div className="flex gap-1.5 items-center">
-              {year} • <Icons category={category} /> {category} • {rating}
+              {movie.year} • <Icons category={movie.category} /> {movie.category} • {movie.rating}
             </div>
-            <h2>{title}</h2>
+            <h2>{movie.title}</h2>
           </div>
         </div>
       )}

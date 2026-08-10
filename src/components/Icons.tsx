@@ -1,5 +1,5 @@
-import MoviesIcon from "../../public/assets/icon-category-movie.svg?react"
-import TvIcon from "../../public/assets/icon-category-tv.svg?react"
+import MoviesIcon from "../assets/icons/icon-category-movie.svg?react"
+import TvIcon from "../assets/icons/icon-category-tv.svg?react"
 import type { IconsProps } from "../types/entertainment";
 
 const Icons = ({ category }: IconsProps) => {
