@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import json from "../../data.json";
 import EntertainmentCards from "../components/EntertainmentCards";
 import type { Entertainment } from "../types/entertainment";
@@ -6,7 +6,18 @@ import SearchBar from "../components/SearchBar";
 
 const Home = () => {
   const data: Entertainment[] = json as Entertainment[];
-  const [movies, setMovies] = useState<Entertainment[]>(data);
+  const [movies, setMovies] = useState<Entertainment[]>(() => {
+    const local = localStorage.getItem("bookmarked");
+
+    if (local) {
+      const savedBookmarkedIds = JSON.parse(local);
+      return data.map((movie) => ({
+        ...movie,
+        isBookmarked: savedBookmarkedIds.includes(movie.id),
+      }));
+    }
+    return data;
+  });
   const [input, setInput] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
 
@@ -18,6 +29,9 @@ const Home = () => {
       .toLocaleLowerCase()
       .includes(searchTerm.trim().toLocaleLowerCase()),
   );
+  const bookmarkedIds = movies
+    .filter((movie) => movie.isBookmarked)
+    .map((movie) => movie.id);
 
   const onChangeBookmark = (id: number) => {
     setMovies((prevMovies) =>
@@ -27,10 +41,16 @@ const Home = () => {
           : { ...movie, isBookmarked: !movie.isBookmarked },
       ),
     );
+
+    localStorage.setItem("bookmarked", JSON.stringify(id));
   };
   const onSearchTerm = () => {
     setSearchTerm(input);
   };
+
+  useEffect(() => {
+    localStorage.setItem("bookmarked", JSON.stringify(bookmarkedIds));
+  }, [movies]);
 
   return (
     <div>
