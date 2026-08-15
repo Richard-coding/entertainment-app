@@ -39,11 +39,11 @@ const EntertainmentCard = ({
               />
             </div>
 
-            <div className="pb-1.5 pl-2">
-              <div className="flex gap-1.5 items-center">
+            <div className="pb-1.5 pl-2 text-white">
+              <div className="flex gap-1.5 items-center text-preset-5-mobile">
                 {movie.year} • <Icons category={movie.category} /> {movie.category} • {movie.rating}
               </div>
-              <h2>{movie.title}</h2>
+              <h2 className="text-preset-3-mobile">{movie.title}</h2>
             </div>
           </div>
         </div>
