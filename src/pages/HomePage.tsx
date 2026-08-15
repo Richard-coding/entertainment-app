@@ -1,100 +1,32 @@
-import { useEffect, useState } from "react";
-import json from "../../data.json";
+import { useOutletContext } from "react-router";
 import EntertainmentCards from "../components/EntertainmentCards";
-import type { Entertainment } from "../types/entertainment";
-import SearchBar from "../components/SearchBar";
+import type { MainLayoutContext } from "../types/entertainment";
 
 const Home = () => {
-  const data: Entertainment[] = json as Entertainment[];
-  const [movies, setMovies] = useState<Entertainment[]>(() => {
-    const local = localStorage.getItem("bookmarked");
-
-    if (local) {
-      const savedBookmarkedIds = JSON.parse(local);
-      return data.map((movie) => ({
-        ...movie,
-        isBookmarked: savedBookmarkedIds.includes(movie.id),
-      }));
-    }
-    return data;
-  });
-  const [input, setInput] = useState<string>("");
-  const [searchTerm, setSearchTerm] = useState<string>("");
+  const { movies, onChangeBookmark } = useOutletContext<MainLayoutContext>();
 
   const isTrending = movies.filter((movie) => movie.isTrending);
   const isRegular = movies.filter((movie) => !movie.isTrending);
-  const filteredMovies = movies.filter((movie) =>
-    movie.title
-      .trim()
-      .toLocaleLowerCase()
-      .includes(searchTerm.trim().toLocaleLowerCase()),
-  );
-  const bookmarkedIds = movies
-    .filter((movie) => movie.isBookmarked)
-    .map((movie) => movie.id);
-
-  const onChangeBookmark = (id: number) => {
-    setMovies((prevMovies) =>
-      prevMovies.map((movie) =>
-        movie.id !== id
-          ? movie
-          : { ...movie, isBookmarked: !movie.isBookmarked },
-      ),
-    );
-
-    localStorage.setItem("bookmarked", JSON.stringify(id));
-  };
-  const onSearchTerm = () => {
-    setSearchTerm(input);
-  };
-
-  useEffect(() => {
-    localStorage.setItem("bookmarked", JSON.stringify(bookmarkedIds));
-  }, [movies]);
 
   return (
-    <div>
-      <SearchBar
-        input={input}
-        onInputChange={setInput}
-        onSearchTerm={onSearchTerm}
-      />
-
-      {searchTerm !== "" ? (
-        filteredMovies.length > 0 ? (
-          <div>
-            <p>
-              Found {filteredMovies.length} results for {searchTerm}
-            </p>
-
-            <EntertainmentCards
-              movies={filteredMovies}
-              onChangeBookmark={onChangeBookmark}
-              variant="regular"
-            />
-          </div>
-        ) : (
-          `Found ${filteredMovies.length} results for ${searchTerm}`
-        )
-      ) : (
-        <div>
-          <h2>Trending</h2>
-
-          <EntertainmentCards
-            movies={isTrending}
-            onChangeBookmark={onChangeBookmark}
-            variant="trending"
-          />
-          <h2>Recommended for you</h2>
-
-          <EntertainmentCards
-            movies={isRegular}
-            onChangeBookmark={onChangeBookmark}
-            variant="regular"
-          />
-        </div>
-      )}
-    </div>
+    <section>
+      <div>
+        <h2 className="text-preset-1-mobile">Trending</h2>
+        <EntertainmentCards
+          movies={isTrending}
+          onChangeBookmark={onChangeBookmark}
+          variant="trending"
+        />
+      </div>
+      <div>
+        <h2>Recommended for you</h2>
+        <EntertainmentCards
+          movies={isRegular}
+          onChangeBookmark={onChangeBookmark}
+          variant="regular"
+        />
+      </div>
+    </section>
   );
 };
 

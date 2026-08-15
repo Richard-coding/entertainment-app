@@ -1,4 +1,4 @@
-import type { CSSProperties } from "react";
+import type { ComponentType, CSSProperties, SVGProps } from "react";
 
 export type categories = "Movie" | "TV Series";
 export type variant = "trending" | "regular";
@@ -47,4 +47,25 @@ export type SearchBarProps = {
   input: string;
   onInputChange: (value: string) => void;
   onSearchTerm: () => void;
+};
+
+export type HomePageProps = {
+  movies: Entertainment[];
+  onChangeBookmark: (id: number) => void;
+  searchTerm: string;
+};
+
+export type MainLayoutContext = {
+  movies: Entertainment[];
+  onChangeBookmark: (id: number) => void;
+};
+export type SearchResultsProps = {
+  movies: Entertainment[];
+  onChangeBookmark: (id: number) => void;
+  searchTerm: string;
+};
+
+export type sideBarProps = {
+  icon: ComponentType<SVGProps<SVGSVGElement>>;
+  link: string;
 };
