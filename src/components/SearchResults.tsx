@@ -1,5 +1,5 @@
-import EntertainmentCards from "./EntertainmentCards";
 import type { SearchResultsProps } from "../types/entertainment";
+import EntertainmentCards from "./EntertainmentCards";
 
 const SearchResults = ({
   movies,
@@ -7,21 +7,20 @@ const SearchResults = ({
   searchTerm,
 }: SearchResultsProps) => {
   return (
-    <section>
-      {movies.length > 0 ? (
-        <div>
-          <h2>
-            Found {movies.length} results for "{searchTerm}"
-          </h2>
+    <section className="px-4 md:px-0">
+      <div className="flex min-w-0 flex-col gap-4">
+        <h1 className="text-preset-1-mobile md:text-preset-1">
+          Found {movies.length} results for "{searchTerm}"
+        </h1>
+
+        {movies.length > 0 && (
           <EntertainmentCards
             movies={movies}
             onChangeBookmark={onChangeBookmark}
             variant="regular"
           />
-        </div>
-      ) : (
-        `Found ${movies.length} results for "${searchTerm}"`
-      )}
+        )}
+      </div>
     </section>
   );
 };
