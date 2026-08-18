@@ -33,7 +33,7 @@ export type EntertainmentCardProps = {
   variant: variant;
 };
 export type IconsProps = {
-  category: string;
+  category: categories;
 };
 export type EntertainmentCardStyle = CSSProperties & {
   "--bg-small": string;
@@ -65,7 +65,7 @@ export type SearchResultsProps = {
   searchTerm: string;
 };
 
-export type sideBarProps = {
+export type SidebarItem = {
   icon: ComponentType<SVGProps<SVGSVGElement>>;
   link: string;
 };
