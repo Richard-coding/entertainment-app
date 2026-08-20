@@ -25,7 +25,7 @@ const SearchBar = ({ input, onInputChange, onSearchTerm }: SearchBarProps) => {
         onChange={(event) => onInputChange(event.target.value)}
         className="
           min-w-0 flex-1 border-b border-transparent
-          bg-transparent pb-2 outline-none
+          bg-transparent outline-none
           text-preset-2-mobile caret-red-500
 
           placeholder:text-white/50

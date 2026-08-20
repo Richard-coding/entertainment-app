@@ -5,6 +5,8 @@ body {
   background: var(--color-blue-950);
   font-family: var(--font-outfit);
   color: var(--color-white);
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 @theme {

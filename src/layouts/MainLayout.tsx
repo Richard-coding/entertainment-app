@@ -90,7 +90,7 @@ const MainLayout = () => {
       </aside>
 
       <section className="min-w-0 flex-1 pt-6 md:pt-8 lg:pt-0">
-        <div className="mb-6 px-4 md:mb-8 md:px-0">
+        <div className="mb-6 px-4 md:mb-8 md:px-0 lg:mt-7">
           <SearchBar
             input={input}
             onInputChange={setInput}
