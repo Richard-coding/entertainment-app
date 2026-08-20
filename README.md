@@ -137,14 +137,6 @@ Start the development server:
 npm run dev
 ```
 
-## Screenshots
-
-*Add project screenshots here.*
-
-## Live Demo
-
-*Add the deployed application URL here.*
-
 ## Challenge
 
 This project was based on the **Entertainment Web App challenge by Frontend Mentor**.
